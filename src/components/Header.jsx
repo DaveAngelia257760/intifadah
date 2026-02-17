@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Menu, X, LayoutGrid, Home as HomeIcon, CloudUpload } from 'lucide-react';
+import { Menu, X, LayoutGrid, Home as HomeIcon, CloudUpload, Info } from 'lucide-react';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,6 +34,10 @@ export default function Header() {
             <CloudUpload size={16} />
             <span>Upload Foto</span>
           </NavLink>
+          <NavLink to="/about" className={navClass}>
+            <Info size={16} />
+            <span>Tentang</span>
+          </NavLink>
         </div>
 
         {/* Tombol Menu Mobile */}
@@ -48,22 +52,19 @@ export default function Header() {
       {/* Menu Mobile Dropdown */}
       {isOpen && (
         <div className="md:hidden bg-white border-t border-slate-50 flex flex-col p-4 gap-2 animate-in slide-in-from-top duration-300">
-          <NavLink 
-            to="/" 
-            onClick={() => setIsOpen(false)} 
-            className={navClass}
-          >
+          <NavLink to="/" onClick={() => setIsOpen(false)} className={navClass}>
             <HomeIcon size={18} />
             <span className="text-xs tracking-widest">Beranda</span>
           </NavLink>
           
-          <NavLink 
-            to="/upload" 
-            onClick={() => setIsOpen(false)} 
-            className={navClass}
-          >
+          <NavLink to="/upload" onClick={() => setIsOpen(false)} className={navClass}>
             <CloudUpload size={18} />
             <span className="text-xs tracking-widest">Upload Foto</span>
+          </NavLink>
+
+          <NavLink to="/about" onClick={() => setIsOpen(false)} className={navClass}>
+            <Info size={18} />
+            <span className="text-xs tracking-widest">Tentang</span>
           </NavLink>
         </div>
       )}
