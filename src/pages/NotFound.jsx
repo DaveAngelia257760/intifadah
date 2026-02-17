@@ -47,7 +47,7 @@ export default function NotFound() {
 
         {/* Footer Note */}
         <p className="mt-16 text-[10px] text-slate-300 font-bold uppercase tracking-[0.4em]">
-          TWIBBONK • PRO EDITION
+          INTIFADAZ • PRO EDITION
         </p>
       </div>
     </div>
