@@ -5,7 +5,7 @@ export default function Terms() {
   const sections = [
     {
       title: "1. Penggunaan Layanan",
-      content: "TWIBBONK menyediakan platform pembuatan twibbon secara gratis untuk tujuan dukungan sosial, kemanusiaan, dan kampanye positif. Dengan menggunakan layanan ini, Anda setuju untuk tidak menggunakan platform ini untuk membuat konten yang mengandung kebencian, SARA, atau pornografi."
+      content: "INTIFADAZ menyediakan platform pembuatan twibbon secara gratis untuk tujuan dukungan sosial, kemanusiaan, dan kampanye positif. Dengan menggunakan layanan ini, Anda setuju untuk tidak menggunakan platform ini untuk membuat konten yang mengandung kebencian, SARA, atau pornografi."
     },
     {
       title: "2. Pemrosesan Data Lokal",
@@ -17,7 +17,7 @@ export default function Terms() {
     },
     {
       title: "4. Batasan Tanggung Jawab",
-      content: "TWIBBONK tidak bertanggung jawab atas segala kerugian yang timbul dari penyalahgunaan hasil gambar oleh pihak ketiga. Kami menyediakan alat 'sebagaimana adanya' (as-is) tanpa jaminan ketersediaan layanan 24/7."
+      content: "INTIFADAZ tidak bertanggung jawab atas segala kerugian yang timbul dari penyalahgunaan hasil gambar oleh pihak ketiga. Kami menyediakan alat 'sebagaimana adanya' (as-is) tanpa jaminan ketersediaan layanan 24/7."
     }
   ];
 
@@ -48,7 +48,7 @@ export default function Terms() {
 
       <div className="mt-20 p-8 bg-slate-100 rounded-2xl border border-slate-200">
         <p className="text-xs text-slate-500 italic text-center leading-relaxed">
-          Dengan melanjutkan penggunaan platform TWIBBONK, Anda dianggap telah membaca dan menyetujui seluruh ketentuan di atas tanpa paksaan dari pihak manapun.
+          Dengan melanjutkan penggunaan platform INTIFADAZ, Anda dianggap telah membaca dan menyetujui seluruh ketentuan di atas tanpa paksaan dari pihak manapun.
         </p>
       </div>
     </div>
