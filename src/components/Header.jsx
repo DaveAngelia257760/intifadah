@@ -96,7 +96,7 @@ export default function Header() {
           
           {/* Footer kecil di dalam menu */}
           <div className="p-4 bg-slate-50/50 text-center">
-            <p className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.3em]">Twibbonk v1.0 • Pro Edition</p>
+            <p className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.3em]">Intifadaz v1.0 • Pro Edition</p>
           </div>
         </div>
       </nav>
