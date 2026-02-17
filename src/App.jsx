@@ -13,8 +13,8 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-slate-50 font-sans antialiased text-slate-900">
       <Header />
       
-      {/* PONDASI: Lebar maksimal 4xl, rata kiri-kanan aman, tapi konten di dalamnya bebas */}
-      <main className="flex-grow w-full max-w-4xl mx-auto px-4 py-6">
+      {/* PONDASI: Mengunci lebar konten tengah agar sejajar kiri-kanan */}
+      <main className="flex-grow w-full max-w-4xl mx-auto px-4 py-8">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/upload" element={<Home />} />
@@ -25,8 +25,6 @@ export default function App() {
       </main>
 
       <Footer />
-      
-      {/* Toast Normal tanpa border/style aneh */}
       <Toaster position="top-right" />
     </div>
   );
