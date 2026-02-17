@@ -11,11 +11,10 @@ import NotFound from './pages/NotFound';
 export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 font-sans antialiased text-slate-900">
-      {/* Navigasi Atas */}
       <Header />
       
-      {/* Konten Utama */}
-      <main className="flex-grow max-w-4xl w-full mx-auto px-4 py-8">
+      {/* PONDASI UTAMA: Aturan lebar & padding dikunci di sini saja */}
+      <main className="flex-grow w-full max-w-4xl mx-auto px-0 md:px-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/upload" element={<Home />} />
@@ -25,16 +24,11 @@ export default function App() {
         </Routes>
       </main>
 
-      {/* Bagian Bawah */}
       <Footer />
-
-      {/* Notifikasi Pop-up */}
+      
       <Toaster 
         position="top-right" 
-        toastOptions={{
-          className: 'font-bold uppercase text-[10px] tracking-widest rounded-none border border-slate-200 shadow-xl',
-          duration: 3000,
-        }}
+        toastOptions={{ className: 'font-bold uppercase text-[10px] tracking-widest' }}
       />
     </div>
   );
