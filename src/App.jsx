@@ -23,43 +23,37 @@ export default function App() {
       userImg.onload = () => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
-        const size = 1000; // Resolusi output 1000x1000
+        const size = 1000; 
         canvas.width = size;
         canvas.height = size;
 
-        // --- LOGIKA CENTER CROP PROPORSIAL ---
+        // LOGIKA CENTER CROP PROPORSIAL (Anti Gepeng)
         let sourceX, sourceY, sourceWidth, sourceHeight;
         const aspect = userImg.width / userImg.height;
 
         if (aspect > 1) {
-          // Landscape: Potong samping
           sourceHeight = userImg.height;
           sourceWidth = userImg.height;
           sourceX = (userImg.width - userImg.height) / 2;
           sourceY = 0;
         } else {
-          // Portrait: Potong atas/bawah
           sourceWidth = userImg.width;
           sourceHeight = userImg.width;
           sourceX = 0;
           sourceY = (userImg.height - userImg.width) / 2;
         }
 
-        // Bersihkan canvas
         ctx.clearRect(0, 0, size, size);
-
-        // Gambar Foto User (Crop dari tengah)
         ctx.drawImage(userImg, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, size, size);
         
-        // Gambar Frame (Overlay)
         frameImg.onload = () => {
           ctx.drawImage(frameImg, 0, 0, size, size);
           const finalData = canvas.toDataURL("image/png");
           setGallery([finalData, ...gallery]);
-          toast.success("Twibbon ditambahkan!");
+          toast.success("Berhasil ditambahkan!");
         };
         
-        frameImg.onerror = () => toast.error("File palestine.png tidak ditemukan!");
+        frameImg.onerror = () => toast.error("File palestine.png tidak ada di /public");
       };
     };
     reader.readAsDataURL(file);
@@ -79,44 +73,53 @@ export default function App() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-4 min-h-screen">
-      <header className="mb-6">
-        <h1 className="text-xl font-bold tracking-tight">TWIBBON GRID</h1>
-        <p className="text-xs text-gray-500 uppercase tracking-widest">Auto Crop & Merge</p>
+    <div className="max-w-4xl mx-auto p-4 min-h-screen">
+      <header className="mb-8 border-b pb-4">
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900">TWIBBON GENERATOR</h1>
+        <p className="text-sm text-slate-500 uppercase font-medium">Mobile & Desktop: 2 Kolom Grid</p>
       </header>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+      {/* FIXED 2 COLUMNS GRID FOR ALL DEVICES */}
+      <div className="grid grid-cols-2 gap-4">
+        
         {/* SLOT UPLOAD */}
-        <label className="relative aspect-square flex flex-col items-center justify-center border-2 border-dashed border-gray-300 bg-white rounded cursor-pointer hover:bg-gray-50 transition-all">
-          <Plus size={28} className="text-gray-400" />
-          <span className="text-[10px] font-bold mt-1 text-gray-400 uppercase">Upload</span>
+        <label className="relative aspect-square flex flex-col items-center justify-center border-2 border-dashed border-slate-300 bg-white rounded cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition-all shadow-sm">
+          <Plus size={48} className="text-slate-400" />
+          <span className="text-xs font-bold mt-3 text-slate-500 uppercase">Tambah Foto</span>
           <input type="file" className="hidden" onChange={handleProcess} accept="image/*" />
         </label>
 
         {/* SLOT GALERI */}
         {gallery.map((img, idx) => (
-          <div key={idx} className="relative aspect-square rounded overflow-hidden border border-gray-200 bg-white group">
+          <div key={idx} className="relative aspect-square rounded overflow-hidden border border-slate-200 bg-white group shadow-sm">
             <img src={img} className="w-full h-full object-cover" alt="Result" />
             
-            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+            {/* Overlay Buttons */}
+            <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
               <button 
                 onClick={() => downloadImg(img, idx)}
-                className="p-2 bg-white rounded text-blue-600 hover:scale-105 transition-transform"
+                className="p-3 bg-white rounded shadow-lg text-blue-600 hover:scale-110 active:scale-95 transition-transform"
                 title="Download"
               >
-                <Download size={16} />
+                <Download size={24} />
               </button>
               <button 
                 onClick={() => removeImg(idx)}
-                className="p-2 bg-white rounded text-red-600 hover:scale-105 transition-transform"
+                className="p-3 bg-white rounded shadow-lg text-red-600 hover:scale-110 active:scale-95 transition-transform"
                 title="Hapus"
               >
-                <Trash2 size={16} />
+                <Trash2 size={24} />
               </button>
             </div>
           </div>
         ))}
       </div>
+
+      {gallery.length === 0 && (
+        <div className="mt-20 text-center opacity-20">
+            <p className="text-lg font-bold uppercase tracking-[0.2em]">Belum Ada Data</p>
+        </div>
+      )}
 
       <canvas ref={canvasRef} className="hidden"></canvas>
       <Toaster position="top-right" />
