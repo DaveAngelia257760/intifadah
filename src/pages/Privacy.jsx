@@ -2,18 +2,22 @@ import React from 'react';
 
 export default function Privacy() {
   return (
-    <div className="max-w-2xl py-2">
-      <h1 className="text-3xl font-black uppercase tracking-tighter mb-8 text-slate-800 leading-none">Privacy Policy</h1>
+    <div className="max-w-2xl">
+      <h1 className="text-3xl font-black uppercase tracking-tighter mb-8 text-slate-800">Privacy Policy</h1>
       <div className="space-y-6 text-sm text-slate-600 leading-relaxed">
-        <p>Layanan kami mengutamakan keamanan data pengguna:</p>
-        <ul className="space-y-4">
+        <p>Kebijakan Privasi ini menjelaskan bagaimana kami menjaga data Anda tetap aman:</p>
+        <ul className="space-y-6">
           <li className="flex gap-4">
             <span className="font-bold text-blue-600">01</span>
-            <span><strong>Tanpa Cloud:</strong> Foto diproses di browser, kami tidak menyimpannya di server manapun.</span>
+            <span><strong>Tanpa Cloud:</strong> Foto Anda diproses langsung di browser. Kami tidak menyimpan foto Anda di server mana pun.</span>
           </li>
           <li className="flex gap-4">
             <span className="font-bold text-blue-600">02</span>
-            <span><strong>LocalStorage:</strong> Data disimpan di memori browser Anda agar riwayat edit tetap ada saat halaman dimuat ulang.</span>
+            <span><strong>LocalStorage:</strong> Kami menyimpan riwayat edit di memori browser Anda (LocalStorage) agar tidak hilang saat reload. Data ini tetap berada di perangkat Anda.</span>
+          </li>
+          <li className="flex gap-4">
+            <span className="font-bold text-blue-600">03</span>
+            <span><strong>Keamanan Lokal:</strong> Privasi Anda sepenuhnya bergantung pada keamanan perangkat yang Anda gunakan sendiri.</span>
           </li>
         </ul>
       </div>
