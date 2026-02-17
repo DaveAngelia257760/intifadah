@@ -6,7 +6,7 @@ export default function Privacy() {
     {
       icon: <EyeOff size={20} />,
       title: "Nol Upload Server",
-      desc: "Berbeda dengan platform lain, foto yang Anda masukkan ke TWIBBONK tidak pernah menyentuh server kami. Semua algoritma cropping dan merging dilakukan langsung di browser Anda."
+      desc: "Berbeda dengan platform lain, foto yang Anda masukkan ke INTIFADAZ tidak pernah menyentuh server kami. Semua algoritma cropping dan merging dilakukan langsung di browser Anda."
     },
     {
       icon: <Database size={20} />,
@@ -33,7 +33,7 @@ export default function Privacy() {
       </div>
 
       <p className="text-slate-600 mb-16 leading-relaxed">
-        Kebijakan Privasi ini menjelaskan bagaimana **TWIBBONK** mengelola data Anda. Kami percaya bahwa privasi bukanlah pilihan, melainkan hak fundamental bagi setiap pengguna digital.
+        Kebijakan Privasi ini menjelaskan bagaimana **INTIFADAZ** mengelola data Anda. Kami percaya bahwa privasi bukanlah pilihan, melainkan hak fundamental bagi setiap pengguna digital.
       </p>
 
       <div className="grid gap-8">
