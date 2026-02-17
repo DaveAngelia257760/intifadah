@@ -49,7 +49,7 @@ export default function Home() {
         frameImg.onload = () => {
           ctx.drawImage(frameImg, 0, 0, size, size);
           setGallery([canvas.toDataURL("image/png"), ...gallery]);
-          toast.success("Berhasil disimpan!");
+          toast.success("Berhasil!");
         };
       };
     };
@@ -58,65 +58,41 @@ export default function Home() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center animate-in fade-in duration-500">
-      
-      {/* Header Section - Diperbaiki biar gak numpuk */}
-      <section className="w-full text-center py-10 px-4 mb-4">
-        <h2 className="text-2xl md:text-4xl font-black text-slate-800 tracking-tighter leading-none mb-2">
-          BUAT TWIBBON <br className="md:hidden" /> DALAM SEKEJAP.
+    <>
+      <section className="py-8 text-center border-b border-slate-100 mb-4">
+        <h2 className="text-[28px] leading-[0.9] font-black tracking-tighter">
+          BUAT TWIBBON <br/> DALAM SEKEJAP.
         </h2>
-        <p className="text-slate-500 text-[10px] md:text-xs uppercase tracking-[0.3em] font-bold">
+        <p className="text-[10px] text-slate-400 uppercase tracking-[0.4em] font-bold mt-3">
           Palestina Merdeka 🇵🇸
         </p>
       </section>
 
-      {/* Grid Utama - Fixed 2 Kolom */}
-      <div className="w-full grid grid-cols-2 gap-3 md:gap-6 px-2">
-        
-        {/* Slot Upload */}
-        <label className="relative aspect-square flex flex-col items-center justify-center border-2 border-dashed border-slate-300 bg-white rounded cursor-pointer hover:bg-blue-50 hover:border-blue-400 transition-all group overflow-hidden">
-          <div className="flex flex-col items-center justify-center group-hover:scale-110 transition-transform">
-            <Plus size={40} className="text-slate-400 group-hover:text-blue-600" />
-            <span className="text-[10px] font-black mt-2 text-slate-400 uppercase tracking-tighter">Tambah Foto</span>
-          </div>
+      <div className="grid grid-cols-2 gap-1 md:gap-4">
+        <label className="relative aspect-square flex flex-col items-center justify-center border-2 border-dashed border-slate-200 bg-white cursor-pointer hover:bg-slate-50 group">
+          <Plus size={32} className="text-slate-300 group-hover:text-blue-600" />
+          <span className="text-[9px] font-black mt-2 text-slate-400 uppercase">Tambah Foto</span>
           <input type="file" className="hidden" onChange={handleProcess} accept="image/*" />
         </label>
 
-        {/* Gallery Slots */}
         {gallery.map((img, idx) => (
-          <div key={idx} className="relative aspect-square rounded overflow-hidden border border-slate-200 bg-white shadow-sm group">
+          <div key={idx} className="relative aspect-square border border-slate-100 bg-white group">
             <img src={img} className="w-full h-full object-cover" alt="Result" />
-            
-            {/* Overlay Hover */}
-            <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-4">
-              <button 
-                onClick={() => {
-                  const link = document.createElement('a');
-                  link.href = img; link.download = `twibbon-${idx}.png`; link.click();
-                }} 
-                className="p-3 bg-white rounded text-blue-600 hover:scale-110 active:scale-95 transition-transform"
-              >
-                <Download size={20} />
+            <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center gap-2">
+              <button onClick={() => {
+                const link = document.createElement('a');
+                link.href = img; link.download = 'twibbon.png'; link.click();
+              }} className="p-2 bg-white text-blue-600 shadow-lg">
+                <Download size={18} />
               </button>
-              <button 
-                onClick={() => setGallery(gallery.filter((_, i) => i !== idx))} 
-                className="p-3 bg-white rounded text-red-600 hover:scale-110 active:scale-95 transition-transform"
-              >
-                <Trash2 size={20} />
+              <button onClick={() => setGallery(gallery.filter((_, i) => i !== idx))} className="p-2 bg-white text-red-600 shadow-lg">
+                <Trash2 size={18} />
               </button>
             </div>
           </div>
         ))}
       </div>
-
-      {/* Empty State */}
-      {gallery.length === 0 && (
-        <div className="py-20 text-center opacity-20">
-          <p className="text-xs font-bold uppercase tracking-widest">Belum Ada Data</p>
-        </div>
-      )}
-
       <canvas ref={canvasRef} className="hidden"></canvas>
-    </div>
+    </>
   );
 }
