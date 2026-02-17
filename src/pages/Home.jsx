@@ -16,12 +16,14 @@ export default function Home() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(gallery));
   }, [gallery]);
 
+  // Fungsi load gambar yang lebih ketat
   const loadImage = (src) => {
     return new Promise((resolve, reject) => {
       const img = new Image();
-      img.crossOrigin = "anonymous";
+      // Penting: Cegah canvas jadi 'tainted' yang bikin blank/error
+      img.crossOrigin = "anonymous"; 
       img.onload = () => resolve(img);
-      img.onerror = (e) => reject(e);
+      img.onerror = () => reject(new Error(`Gagal memuat: ${src}`));
       img.src = src;
     });
   };
@@ -29,22 +31,28 @@ export default function Home() {
   const handleProcess = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    const loadingToast = toast.loading("Memproses...");
+
+    const loadingToast = toast.loading("Sedang meramu...");
 
     try {
       const reader = new FileReader();
       reader.readAsDataURL(file);
+      
       reader.onload = async (event) => {
         try {
-          const [userImg, frameImg] = await Promise.all([
-            loadImage(event.target.result),
-            loadImage(DEFAULT_TWIBBON)
-          ]);
+          // 1. Load Twibbon dulu, kalo gagal langsung stop
+          const frameImg = await loadImage(DEFAULT_TWIBBON);
+          // 2. Load Foto User
+          const userImg = await loadImage(event.target.result);
+
           const canvas = canvasRef.current;
           const ctx = canvas.getContext('2d');
-          const size = 1000;
-          canvas.width = size; canvas.height = size;
+          const size = 1000; // Resolusi tinggi biar nggak pecah
+          
+          canvas.width = size;
+          canvas.height = size;
 
+          // Hitung proporsi crop tengah
           let sx, sy, sw, sh;
           const aspect = userImg.width / userImg.height;
           if (aspect > 1) {
@@ -55,22 +63,31 @@ export default function Home() {
             sx = 0; sy = (userImg.height - userImg.width) / 2;
           }
 
+          // Bersihkan canvas sebelum gambar
           ctx.clearRect(0, 0, size, size);
+          
+          // Gambar Foto User
           ctx.drawImage(userImg, sx, sy, sw, sh, 0, 0, size, size);
+          
+          // Gambar Frame di Atasnya
           ctx.drawImage(frameImg, 0, 0, size, size);
 
+          // Cek apakah hasil gambar valid (tidak blank)
           const finalData = canvas.toDataURL("image/png");
+          if (finalData === "data:,") throw new Error("Hasil blank");
+
           setGallery(prev => [finalData, ...prev]);
           toast.dismiss(loadingToast);
-          toast.success("Berhasil!");
+          toast.success("Siap!");
         } catch (err) {
+          console.error(err);
           toast.dismiss(loadingToast);
-          toast.error("Gagal memuat frame.");
+          toast.error("Gagal! Pastikan file /public/palestine.png ada.");
         }
       };
     } catch (err) {
       toast.dismiss(loadingToast);
-      toast.error("Gagal!");
+      toast.error("File rusak!");
     }
     e.target.value = null;
   };
@@ -79,13 +96,13 @@ export default function Home() {
     <div className="w-full pb-32 animate-in fade-in duration-700">
       <section className="py-20 px-6 text-center bg-white rounded-b-[3rem] shadow-sm mb-12">
         <h2 className="text-[38px] md:text-5xl leading-none font-black tracking-tight text-slate-900 mb-4 uppercase">
-          Buat Twibbon <br className="hidden md:block" /> Dalam Sekejap.
+          BUAT TWIBBON <br className="hidden md:block" /> DALAM SEKEJAP.
         </h2>
         <p className="text-[11px] text-slate-400 uppercase tracking-[0.4em] font-bold">Palestina Merdeka 🇵🇸</p>
       </section>
 
       <div className="px-4 md:px-0">
-        <div className="grid grid-cols-2 gap-4 md:gap-8">
+        <div className="grid grid-cols-2 gap-4 md:gap-8 text-center">
           <label className="relative aspect-square flex flex-col items-center justify-center bg-white rounded-3xl border-2 border-dashed border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 transition-all cursor-pointer group shadow-sm">
             <div className="w-14 h-14 flex items-center justify-center rounded-2xl bg-slate-50 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-inner">
               <Plus size={28} />
