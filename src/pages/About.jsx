@@ -33,7 +33,7 @@ export default function About() {
             Bicara Lewat <br /> <span className="text-blue-600">Twibbon.</span>
           </h1>
           <p className="text-slate-500 text-lg leading-relaxed">
-            TWIBBONK dirancang sebagai alat kampanye digital yang cepat, gratis, dan tanpa batas. 
+            INTIFADAZ dirancang sebagai alat kampanye digital yang cepat, gratis, dan tanpa batas. 
             Mendukung gerakan kemanusiaan dan solidaritas dunia melalui visual yang kuat.
           </p>
         </div>
