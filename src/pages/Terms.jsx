@@ -22,14 +22,15 @@ export default function Terms() {
   ];
 
   return (
-    <div className="py-20 px-6 max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+    /* PERBAIKAN: Dari py-20 menjadi pt-20 pb-10 agar jarak ke footer rapat & rapi */
+    <div className="pt-20 pb-10 px-6 max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="flex items-center gap-4 mb-8">
         <div className="p-3 bg-blue-600 rounded-xl text-white shadow-lg">
           <Scale size={28} />
         </div>
         <div>
-          <h1 className="text-3xl font-black uppercase tracking-tighter text-slate-900">Terms of Service</h1>
-          <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.3em]">Terakhir Diperbarui: 18 Mei 2024</p>
+          <h1 className="text-3xl font-black uppercase tracking-tighter text-slate-900 leading-none">Terms of Service</h1>
+          <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.3em] mt-1">Terakhir Diperbarui: 18 Mei 2024</p>
         </div>
       </div>
 
@@ -46,8 +47,9 @@ export default function Terms() {
         ))}
       </div>
 
-      <div className="mt-20 p-8 bg-slate-100 rounded-2xl border border-slate-200">
-        <p className="text-xs text-slate-500 italic text-center leading-relaxed">
+      {/* Bagian penutup/disclaimer */}
+      <div className="mt-16 p-8 bg-slate-100 rounded-2xl border border-slate-200 shadow-sm">
+        <p className="text-xs text-slate-500 italic text-center leading-relaxed font-medium">
           Dengan melanjutkan penggunaan platform INTIFADAZ, Anda dianggap telah membaca dan menyetujui seluruh ketentuan di atas tanpa paksaan dari pihak manapun.
         </p>
       </div>
