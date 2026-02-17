@@ -4,20 +4,17 @@ import { Ghost } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center py-20 text-center animate-in zoom-in duration-300">
-      <div className="bg-slate-100 p-6 rounded-full mb-6 text-slate-400">
-        <Ghost size={64} />
+    <div className="flex flex-col items-center justify-center py-24 px-4 text-center animate-in zoom-in duration-300">
+      <div className="mb-6 p-6 bg-slate-100 rounded-full text-slate-400">
+        <Ghost size={60} />
       </div>
-      <h1 className="text-6xl font-black text-slate-800 tracking-tighter">404</h1>
-      <p className="text-slate-500 uppercase font-bold tracking-widest mt-2">Halaman Hilang!</p>
-      <p className="text-slate-400 text-sm mt-4 max-w-xs">
-        Sepertinya Anda tersesat di luar jalur. Yuk balik lagi ke beranda.
-      </p>
+      <h1 className="text-7xl font-black text-slate-800 tracking-tighter">404</h1>
+      <p className="text-slate-500 uppercase font-bold tracking-[0.3em] mt-2 text-xs">Halaman Tidak Ditemukan</p>
       <Link 
         to="/" 
-        className="mt-8 px-8 py-3 bg-blue-600 text-white font-black rounded uppercase tracking-tighter hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200"
+        className="mt-10 px-10 py-4 bg-slate-900 text-white font-black uppercase tracking-tighter text-sm hover:bg-blue-600 transition-colors"
       >
-        Balik ke Beranda
+        Balik Ke Beranda
       </Link>
     </div>
   );
