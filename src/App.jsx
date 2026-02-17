@@ -12,7 +12,9 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 font-sans antialiased text-slate-900">
       <Header />
-      <main className="flex-grow w-full max-w-4xl mx-auto px-4 py-8">
+      
+      {/* PONDASI: px-0 di mobile biar mepet layar, px-4 di desktop biar gak mepet tembok */}
+      <main className="flex-grow w-full max-w-4xl mx-auto px-0 md:px-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/upload" element={<Home />} />
@@ -21,8 +23,10 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+
       <Footer />
-      <Toaster position="top-right" />
+      
+      <Toaster position="bottom-left" />
     </div>
   );
 }
