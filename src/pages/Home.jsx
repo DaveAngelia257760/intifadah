@@ -72,7 +72,7 @@ export default function Home() {
       {/* JUDUL: leading-tight (anti-numpuk), max-w-lg (anti-kosong di desktop) */}
       <section className="mb-10 max-w-lg">
         <h2 className="text-3xl md:text-5xl font-black tracking-tighter uppercase leading-[1.1] text-slate-800">
-          BUAT TWIBBON <br/> DALAM SEKEJAP.
+          BUAT TWIBBON DALAM SEKEJAP.
         </h2>
         <p className="text-[10px] text-slate-400 uppercase tracking-[0.3em] font-bold mt-4">
           Palestina Merdeka 🇵🇸
