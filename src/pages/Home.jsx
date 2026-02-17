@@ -3,7 +3,7 @@ import { Plus, Download, Trash2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const DEFAULT_TWIBBON = '/palestina.png';
-const STORAGE_KEY = 'twibbon_gallery_data'; // KEY ASLI
+const STORAGE_KEY = 'twibbon_gallery_data';
 
 export default function Home() {
   const [gallery, setGallery] = useState(() => {
@@ -16,9 +16,16 @@ export default function Home() {
   });
   const canvasRef = useRef(null);
 
-  // SIMPAN KE STORAGE SETIAP PERUBAHAN
+  // Pastikan data tersimpan di LocalStorage setiap ada perubahan
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(gallery));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(gallery));
+    } catch (e) {
+      // Jika memori penuh (penyebab blank), hapus 1 foto terlama secara otomatis
+      if (gallery.length > 0) {
+        setGallery(prev => prev.slice(0, -1));
+      }
+    }
   }, [gallery]);
 
   const handleProcess = (e) => {
@@ -51,13 +58,10 @@ export default function Home() {
           ctx.drawImage(userImg, sx, sy, sw, sh, 0, 0, size, size);
           ctx.drawImage(frameImg, 0, 0, size, size);
           
-          try {
-            const dataUrl = canvas.toDataURL("image/png");
-            setGallery(prev => [dataUrl, ...prev]);
-            toast.success("Berhasil dibuat!");
-          } catch (err) {
-            toast.error("Gagal memproses gambar");
-          }
+          // KOMPRESI: Pakai JPEG 0.6 agar ukuran file kecil dan tidak bikin web blank
+          const result = canvas.toDataURL("image/jpeg", 0.6);
+          setGallery(prev => [result, ...prev]);
+          toast.success("Berhasil!");
         };
         frameImg.src = DEFAULT_TWIBBON;
       };
@@ -68,10 +72,10 @@ export default function Home() {
   };
 
   return (
-    <>
-      {/* JUDUL: leading-tight (anti-numpuk), max-w-lg (anti-kosong di desktop) */}
-      <section className="mb-10 max-w-lg">
-        <h2 className="text-3xl md:text-5xl font-black tracking-tighter uppercase leading-[1.1] text-slate-800">
+    <div className="space-y-8">
+      {/* JUDUL: Leading-tight agar tidak numpuk, Max-w agar turun otomatis (alami) */}
+      <section className="text-left">
+        <h2 className="text-3xl md:text-5xl font-black tracking-tighter uppercase leading-[1.1] text-slate-800 max-w-[280px] md:max-w-md">
           BUAT TWIBBON DALAM SEKEJAP.
         </h2>
         <p className="text-[10px] text-slate-400 uppercase tracking-[0.3em] font-bold mt-4">
@@ -79,9 +83,9 @@ export default function Home() {
         </p>
       </section>
 
-      {/* GRID: 2 Kolom konsisten */}
+      {/* GRID: 2 Kolom tetap rapi */}
       <div className="grid grid-cols-2 gap-2 md:gap-4">
-        <label className="relative aspect-square flex flex-col items-center justify-center border-2 border-dashed border-slate-200 bg-white cursor-pointer hover:bg-slate-50 transition-all group">
+        <label className="relative aspect-square flex flex-col items-center justify-center border-2 border-dashed border-slate-200 bg-white cursor-pointer hover:bg-slate-50 transition-all group shadow-sm">
           <Plus size={32} className="text-slate-300 group-hover:text-blue-600" />
           <span className="text-[9px] font-black mt-2 text-slate-400 uppercase">Tambah Foto</span>
           <input type="file" className="hidden" onChange={handleProcess} accept="image/*" />
@@ -93,7 +97,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center gap-2">
               <button onClick={() => {
                 const link = document.createElement('a');
-                link.href = img; link.download = 'twibbon.png'; link.click();
+                link.href = img; link.download = 'twibbon.jpg'; link.click();
               }} className="p-2.5 bg-white text-blue-600 shadow-xl rounded-sm">
                 <Download size={18} />
               </button>
@@ -105,6 +109,6 @@ export default function Home() {
         ))}
       </div>
       <canvas ref={canvasRef} className="hidden"></canvas>
-    </>
+    </div>
   );
 }
