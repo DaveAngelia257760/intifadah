@@ -120,10 +120,10 @@ export default function Home() {
       {/* Rounded tetap xl sesuai kode Anda */}
       <section className="py-16 px-6 text-center bg-white rounded-b-xl shadow-sm mb-12">
         <h2 className="text-[32px] md:text-5xl leading-none font-black tracking-tight text-slate-900 mb-2">
-          TWIBBON UNLIMITED
+          #BERSAMA PALESTINA
         </h2>
         <p className="text-[10px] text-slate-400 uppercase tracking-[0.3em] font-bold italic">
-          Kapasitas Besar (IndexedDB Ready)
+          Tunjukkan Solidaritasmu, Sebarkan Dukungan Lewat Twibbon
         </p>
       </section>
 
