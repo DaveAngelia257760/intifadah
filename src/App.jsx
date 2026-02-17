@@ -13,8 +13,8 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-slate-50 font-sans antialiased text-slate-900">
       <Header />
       
-      {/* PONDASI: Mengunci lebar konten tengah agar sejajar kiri-kanan */}
-      <main className="flex-grow w-full max-w-4xl mx-auto px-4 py-8">
+      {/* PONDASI UTAMA: Mengunci lebar dan padding */}
+      <main className="flex-grow w-full max-w-4xl mx-auto px-4 py-6 md:py-10">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/upload" element={<Home />} />
