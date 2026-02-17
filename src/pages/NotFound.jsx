@@ -4,7 +4,8 @@ import { Home, AlertCircle, ArrowLeft } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-6">
+    /* PERBAIKAN: Hapus min-h-[80vh] agar tidak longgar, ganti ke pt-20 pb-10 */
+    <div className="pt-20 pb-10 px-6 flex items-center justify-center">
       <div className="max-w-md w-full text-center animate-in fade-in zoom-in duration-500">
         
         {/* Visual Icon */}
@@ -30,7 +31,7 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link 
             to="/" 
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-slate-900 text-white font-black uppercase text-[11px] tracking-[0.2em] rounded-xl hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-200 transition-all active:scale-95"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-slate-900 text-white font-black uppercase text-[11px] tracking-[0.2em] rounded-xl hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-200 transition-all active:scale-95 shadow-sm"
           >
             <Home size={16} />
             Beranda
@@ -38,7 +39,7 @@ export default function NotFound() {
           
           <button 
             onClick={() => window.history.back()}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-white text-slate-600 border border-slate-200 font-black uppercase text-[11px] tracking-[0.2em] rounded-xl hover:bg-slate-50 transition-all active:scale-95"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-white text-slate-600 border border-slate-200 font-black uppercase text-[11px] tracking-[0.2em] rounded-xl hover:bg-slate-50 transition-all active:scale-95 shadow-sm"
           >
             <ArrowLeft size={16} />
             Kembali
