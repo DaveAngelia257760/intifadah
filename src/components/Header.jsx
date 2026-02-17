@@ -6,7 +6,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navClass = ({ isActive }) => 
-    `px-4 py-2 transition-colors ${isActive ? 'text-blue-600 font-bold' : 'text-slate-500 hover:text-blue-600'}`;
+    `px-4 py-2 transition-colors ${isActive ? 'text-blue-600 font-bold' : 'text-slate-600 hover:text-blue-500'}`;
 
   return (
     <nav className="bg-white border-b border-slate-100 sticky top-0 z-50">
