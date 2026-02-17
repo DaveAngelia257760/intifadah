@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { Plus, Download, Trash2, ImageIcon } from 'lucide-react';
+import { Plus, Download, Trash2 } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 
-const DEFAULT_TWIBBON = '/palestina.png';
+const DEFAULT_TWIBBON = '/palestine.png';
 
 export default function App() {
   const [gallery, setGallery] = useState([]);
@@ -23,31 +23,53 @@ export default function App() {
       userImg.onload = () => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
-        canvas.width = 1000;
-        canvas.height = 1000;
+        const size = 1000; // Resolusi output 1000x1000
+        canvas.width = size;
+        canvas.height = size;
 
-        // Gambar Foto User
-        ctx.drawImage(userImg, 0, 0, 1000, 1000);
+        // --- LOGIKA CENTER CROP PROPORSIAL ---
+        let sourceX, sourceY, sourceWidth, sourceHeight;
+        const aspect = userImg.width / userImg.height;
+
+        if (aspect > 1) {
+          // Landscape: Potong samping
+          sourceHeight = userImg.height;
+          sourceWidth = userImg.height;
+          sourceX = (userImg.width - userImg.height) / 2;
+          sourceY = 0;
+        } else {
+          // Portrait: Potong atas/bawah
+          sourceWidth = userImg.width;
+          sourceHeight = userImg.width;
+          sourceX = 0;
+          sourceY = (userImg.height - userImg.width) / 2;
+        }
+
+        // Bersihkan canvas
+        ctx.clearRect(0, 0, size, size);
+
+        // Gambar Foto User (Crop dari tengah)
+        ctx.drawImage(userImg, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, size, size);
         
         // Gambar Frame (Overlay)
         frameImg.onload = () => {
-          ctx.drawImage(frameImg, 0, 0, 1000, 1000);
+          ctx.drawImage(frameImg, 0, 0, size, size);
           const finalData = canvas.toDataURL("image/png");
           setGallery([finalData, ...gallery]);
           toast.success("Twibbon ditambahkan!");
         };
         
-        frameImg.onerror = () => toast.error("File palestine.png tidak ditemukan di folder public!");
+        frameImg.onerror = () => toast.error("File palestine.png tidak ditemukan!");
       };
     };
     reader.readAsDataURL(file);
-    e.target.value = null; // Reset input agar bisa upload file yang sama
+    e.target.value = null; 
   };
 
   const downloadImg = (data, i) => {
     const link = document.createElement('a');
     link.href = data;
-    link.download = `twibbon-${i}.png`;
+    link.download = `twibbon-${Date.now()}.png`;
     link.click();
   };
 
@@ -57,56 +79,46 @@ export default function App() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <header className="mb-6 text-center">
-        <h1 className="text-xl font-bold tracking-tight">TWIBBON MAKER</h1>
-        <p className="text-xs text-gray-500 uppercase">Sejajar Grid Edition</p>
+    <div className="max-w-2xl mx-auto p-4 min-h-screen">
+      <header className="mb-6">
+        <h1 className="text-xl font-bold tracking-tight">TWIBBON GRID</h1>
+        <p className="text-xs text-gray-500 uppercase tracking-widest">Auto Crop & Merge</p>
       </header>
 
-      {/* Grid Utama: Slot Upload + Galeri Sejajar */}
-      <div className="grid grid-cols-2 gap-3">
-        
-        {/* SLOT 1: TOMBOL UPLOAD (Selalu di depan) */}
-        <label className="relative aspect-square flex flex-col items-center justify-center border-2 border-dashed border-gray-300 bg-white rounded cursor-pointer hover:bg-gray-50 transition-colors">
-          <Plus size={32} className="text-gray-400" />
-          <span className="text-[10px] font-bold mt-2 text-gray-500 uppercase">Tambah Foto</span>
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+        {/* SLOT UPLOAD */}
+        <label className="relative aspect-square flex flex-col items-center justify-center border-2 border-dashed border-gray-300 bg-white rounded cursor-pointer hover:bg-gray-50 transition-all">
+          <Plus size={28} className="text-gray-400" />
+          <span className="text-[10px] font-bold mt-1 text-gray-400 uppercase">Upload</span>
           <input type="file" className="hidden" onChange={handleProcess} accept="image/*" />
         </label>
 
-        {/* SLOT BERIKUTNYA: HASIL GALERI */}
+        {/* SLOT GALERI */}
         {gallery.map((img, idx) => (
           <div key={idx} className="relative aspect-square rounded overflow-hidden border border-gray-200 bg-white group">
             <img src={img} className="w-full h-full object-cover" alt="Result" />
             
-            {/* Overlay Actions */}
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
               <button 
                 onClick={() => downloadImg(img, idx)}
-                className="p-2 bg-white rounded text-blue-600 hover:scale-110 transition-transform"
+                className="p-2 bg-white rounded text-blue-600 hover:scale-105 transition-transform"
+                title="Download"
               >
-                <Download size={18} />
+                <Download size={16} />
               </button>
               <button 
                 onClick={() => removeImg(idx)}
-                className="p-2 bg-white rounded text-red-600 hover:scale-110 transition-transform"
+                className="p-2 bg-white rounded text-red-600 hover:scale-105 transition-transform"
+                title="Hapus"
               >
-                <Trash2 size={18} />
+                <Trash2 size={16} />
               </button>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Jika Kosong Banget */}
-      {gallery.length === 0 && (
-        <p className="text-center text-[10px] text-gray-400 mt-8 uppercase tracking-widest">
-          Belum ada gambar tersimpan
-        </p>
-      )}
-
-      {/* Canvas Tersembunyi */}
       <canvas ref={canvasRef} className="hidden"></canvas>
-      
       <Toaster position="bottom-center" />
     </div>
   );
