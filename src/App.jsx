@@ -6,7 +6,7 @@ const DEFAULT_TWIBBON = '/palestina.png';
 const STORAGE_KEY = 'twibbon_gallery_data';
 
 export default function App() {
-  // Load data dari localStorage saat inisialisasi awal
+  // Load data dari localStorage (Initial State)
   const [gallery, setGallery] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     return saved ? JSON.parse(saved) : [];
@@ -14,7 +14,7 @@ export default function App() {
   
   const canvasRef = useRef(null);
 
-  // Simpan ke localStorage otomatis setiap kali gallery berubah
+  // Sync ke localStorage setiap ada perubahan
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(gallery));
   }, [gallery]);
@@ -38,7 +38,7 @@ export default function App() {
         canvas.width = size;
         canvas.height = size;
 
-        // LOGIKA CENTER CROP PROPORSIAL (Anti Gepeng)
+        // CENTER CROP PROPORSIAL
         let sourceX, sourceY, sourceWidth, sourceHeight;
         const aspect = userImg.width / userImg.height;
 
@@ -61,7 +61,7 @@ export default function App() {
           ctx.drawImage(frameImg, 0, 0, size, size);
           const finalData = canvas.toDataURL("image/png");
           setGallery([finalData, ...gallery]);
-          toast.success("Berhasil ditambahkan & disimpan!");
+          toast.success("Berhasil disimpan!");
         };
         
         frameImg.onerror = () => toast.error("File palestine.png tidak ditemukan!");
@@ -79,29 +79,18 @@ export default function App() {
   };
 
   const removeImg = (i) => {
-    const newGallery = gallery.filter((_, idx) => idx !== i);
-    setGallery(newGallery);
-    toast.error("Dihapus dari penyimpanan");
+    setGallery(gallery.filter((_, idx) => idx !== i));
+    toast.error("Dihapus");
   };
 
   return (
     <div className="max-w-4xl mx-auto p-4 min-h-screen">
-      <header className="mb-8 border-b pb-4 flex justify-between items-end">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">TWIBBON GRID</h1>
-          <p className="text-sm text-slate-500 uppercase font-medium">Auto-save LocalStorage</p>
-        </div>
-        {gallery.length > 0 && (
-          <button 
-            onClick={() => { if(confirm('Hapus semua galeri?')) setGallery([]); }}
-            className="text-[10px] font-bold text-red-500 border border-red-200 px-2 py-1 rounded hover:bg-red-50"
-          >
-            RESET ALL
-          </button>
-        )}
+      <header className="mb-8 border-b pb-4">
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900 uppercase">Twibbon Grid</h1>
+        <p className="text-xs text-slate-500 font-medium uppercase tracking-widest">Storage & Auto-Crop Active</p>
       </header>
 
-      {/* FIXED 2 COLUMNS GRID */}
+      {/* GRID 2 KOLOM TETAP (MOBILE & DESKTOP) */}
       <div className="grid grid-cols-2 gap-4">
         
         {/* SLOT UPLOAD */}
@@ -111,11 +100,12 @@ export default function App() {
           <input type="file" className="hidden" onChange={handleProcess} accept="image/*" />
         </label>
 
-        {/* SLOT GALERI */}
+        {/* SLOT GALERI HASIL */}
         {gallery.map((img, idx) => (
           <div key={idx} className="relative aspect-square rounded overflow-hidden border border-slate-200 bg-white group shadow-sm">
             <img src={img} className="w-full h-full object-cover" alt="Result" />
             
+            {/* OVERLAY ACTION */}
             <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
               <button 
                 onClick={() => downloadImg(img, idx)}
@@ -136,11 +126,13 @@ export default function App() {
 
       {gallery.length === 0 && (
         <div className="mt-20 text-center opacity-20">
-            <p className="text-lg font-bold uppercase tracking-[0.2em]">Kosong</p>
+            <p className="text-lg font-bold uppercase tracking-[0.2em]">Belum Ada Hasil</p>
         </div>
       )}
 
+      {/* PROSES CANVAS TERSEMBUNYI */}
       <canvas ref={canvasRef} className="hidden"></canvas>
+      
       <Toaster position="top-right" />
     </div>
   );
