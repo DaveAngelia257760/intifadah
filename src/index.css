@@ -2,4 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
-body { @apply bg-gray-50 text-slate-800; }
+@layer base {
+  html {
+    /* Mencegah zoom otomatis di beberapa browser */
+    -webkit-text-size-adjust: 100%;
+    /* Menghaluskan scrolling */
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-800 antialiased;
+    /* Mencegah double-tap to zoom di seluruh body */
+    touch-action: pan-x pan-y;
+    /* Menghapus highlight biru saat diketuk di mobile (agar lebih pro) */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Targetkan elemen interaktif agar tidak ngezoom saat diketuk cepat */
+  button, 
+  a, 
+  input, 
+  label {
+    touch-action: manipulation;
+  }
+
+  /* Fix khusus iOS: Mencegah zoom saat fokus ke input/file picker */
+  input[type="text"],
+  input[type="file"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Custom Scrollbar agar lebih elegan (Opsional) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 rounded-full hover:bg-slate-300 transition-colors;
+}
+
+/* Warna seleksi teks (Matching dengan tema biru TWIBBONK) */
+::selection {
+  @apply bg-blue-600/20 text-blue-900;
+}
