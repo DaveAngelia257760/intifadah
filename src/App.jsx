@@ -12,9 +12,7 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 font-sans antialiased text-slate-900">
       <Header />
-      
-      {/* PONDASI UTAMA: Mengunci lebar konten tengah */}
-      <main className="flex-grow w-full max-w-4xl mx-auto px-4 py-6 md:py-10">
+      <main className="flex-grow w-full max-w-4xl mx-auto px-4 py-8">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/upload" element={<Home />} />
@@ -23,9 +21,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-
       <Footer />
-      
       <Toaster position="top-right" />
     </div>
   );
