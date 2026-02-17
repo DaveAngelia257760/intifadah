@@ -13,8 +13,8 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-slate-50 font-sans antialiased text-slate-900">
       <Header />
       
-      {/* PONDASI UTAMA: Aturan lebar & padding dikunci di sini saja */}
-      <main className="flex-grow w-full max-w-4xl mx-auto px-0 md:px-4">
+      {/* PONDASI PUSAT: Satu-satunya pengatur lebar & padding konten */}
+      <main className="flex-grow w-full max-w-4xl mx-auto px-4 sm:px-6 py-6 md:py-10">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/upload" element={<Home />} />
@@ -28,7 +28,9 @@ export default function App() {
       
       <Toaster 
         position="top-right" 
-        toastOptions={{ className: 'font-bold uppercase text-[10px] tracking-widest' }}
+        toastOptions={{ 
+          className: 'font-bold uppercase text-[10px] tracking-widest border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' 
+        }}
       />
     </div>
   );
