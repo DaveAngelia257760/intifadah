@@ -13,7 +13,7 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-slate-50 font-sans antialiased text-slate-900">
       <Header />
       
-      {/* PONDASI UTAMA: Aturan lebar & padding dikunci di sini saja */}
+      {/* PONDASI UTAMA: Mengunci lebar konten tengah */}
       <main className="flex-grow w-full max-w-4xl mx-auto px-4 py-6 md:py-10">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -26,12 +26,7 @@ export default function App() {
 
       <Footer />
       
-      <Toaster 
-        position="top-right" 
-        toastOptions={{ 
-          className: 'text-xs font-bold' 
-        }}
-      />
+      <Toaster position="top-right" />
     </div>
   );
 }
