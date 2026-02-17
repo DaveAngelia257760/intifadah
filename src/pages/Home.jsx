@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Plus, Download, Trash2 } from 'lucide-react';
 import toast from 'react-hot-toast';
-import Modal from './components/Modal'; // Pastikan path import benar
+import Modal from '../components/Modal'; // Pastikan path import benar
 
 const DEFAULT_TWIBBON = '/palestina.png';
 const STORAGE_KEY = 'twibbon_gallery_data';
