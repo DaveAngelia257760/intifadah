@@ -2,24 +2,20 @@ import React from 'react';
 
 export default function Terms() {
   return (
-    <div className="max-w-2xl mx-auto py-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <h1 className="text-3xl font-black text-slate-800 tracking-tighter mb-6 uppercase">Terms of Service</h1>
-      <div className="prose prose-slate text-slate-600 space-y-4 text-sm leading-relaxed">
-        <p>Selamat datang di <strong>TWIBBONK</strong>. Dengan menggunakan layanan kami, Anda menyetujui ketentuan berikut:</p>
-        
+    <div className="py-10 px-4 animate-in fade-in duration-500">
+      <h1 className="text-3xl font-black uppercase tracking-tighter mb-8 text-slate-800">Terms of Service</h1>
+      <div className="space-y-6 text-slate-600 text-sm leading-relaxed">
         <section>
-          <h2 className="font-bold text-slate-800 uppercase mt-6 mb-2">1. Penggunaan Layanan</h2>
-          <p>Layanan ini disediakan untuk membantu pengguna membuat foto profil dengan bingkai kampanye kemanusiaan. Anda dilarang mengunggah konten yang mengandung SARA, pornografi, atau kekerasan.</p>
+          <h2 className="font-bold text-slate-900 uppercase tracking-widest mb-2">1. Penggunaan</h2>
+          <p>Layanan TWIBBONK disediakan secara gratis untuk kepentingan kampanye kemanusiaan. Pengguna dilarang menggunakan tool ini untuk konten yang melanggar hukum atau menyinggung SARA.</p>
         </section>
-
         <section>
-          <h2 className="font-bold text-slate-800 uppercase mt-6 mb-2">2. Batasan Tanggung Jawab</h2>
-          <p>TWIBBONK tidak bertanggung jawab atas penyalahgunaan foto hasil gabungan yang dilakukan oleh pengguna. Seluruh proses pengolahan gambar dilakukan di sisi klien (browser Anda).</p>
+          <h2 className="font-bold text-slate-900 uppercase tracking-widest mb-2">2. Pemrosesan Data</h2>
+          <p>Seluruh proses penggabungan gambar terjadi di sisi klien. Kami tidak memiliki akses ke foto yang Anda unggah sebelum digabungkan dengan twibbon.</p>
         </section>
-
         <section>
-          <h2 className="font-bold text-slate-800 uppercase mt-6 mb-2">3. Perubahan Ketentuan</h2>
-          <p>Kami berhak mengubah ketentuan ini kapan saja tanpa pemberitahuan sebelumnya demi meningkatkan kualitas layanan.</p>
+          <h2 className="font-bold text-slate-900 uppercase tracking-widest mb-2">3. Lisensi</h2>
+          <p>Hasil karya yang diunduh adalah milik pengguna, namun desain twibbon tetap mengikuti hak cipta dari kreator aslinya.</p>
         </section>
       </div>
     </div>
