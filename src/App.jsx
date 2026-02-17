@@ -13,7 +13,6 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-slate-50 font-sans antialiased text-slate-900">
       <Header />
       
-      {/* PONDASI: px-0 di mobile biar mepet layar, px-4 di desktop biar gak mepet tembok */}
       <main className="flex-grow w-full max-w-4xl mx-auto px-0 md:px-4">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -26,7 +25,7 @@ export default function App() {
 
       <Footer />
       
-      <Toaster position="bottom-left" />
+      <Toaster position="bottom-center" />
     </div>
   );
 }
