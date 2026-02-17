@@ -24,7 +24,7 @@ export default function Header() {
             <div className="bg-slate-900 p-1.5 rounded-lg group-hover:bg-blue-600 transition-all duration-500">
               <LayoutGrid className="text-white" size={20} />
             </div>
-            <span className="font-black text-xl tracking-tighter text-slate-900">TWIBBON<span className="text-blue-600">K</span></span>
+            <span className="font-black text-xl tracking-tighter text-slate-900">INTIFADAZ<span className="text-blue-600">K</span></span>
           </Link>
 
           {/* Menu Desktop */}
