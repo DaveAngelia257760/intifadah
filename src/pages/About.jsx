@@ -87,13 +87,6 @@ export default function About() {
           </div>
         </div>
       </div>
-
-      {/* Footer Simple */}
-      <footer className="mt-20 py-10 text-center border-t border-slate-200">
-        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-          &copy; {new Date().getFullYear()} TWIBBONK PRO • Made for Freedom
-        </p>
-      </footer>
     </div>
   );
 }
