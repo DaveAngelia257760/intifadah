@@ -157,4 +157,4 @@ export default function Home() {
       <canvas ref={canvasRef} className="hidden"></canvas>
     </div>
   );
-}
+} 
