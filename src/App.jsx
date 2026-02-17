@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Camera, Download, Trash2, Image as ImageIcon, Plus } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 
-const DEFAULT_TWIBBON = '/palestine.png'; // Pastikan file ini ada di folder public/
+const DEFAULT_TWIBBON = '/palestina.png'; // Pastikan file ini ada di folder public/
 
 export default function App() {
   const [image, setImage] = useState(null);
