@@ -6,10 +6,10 @@ export default function Footer() {
     <footer className="bg-white border-t border-slate-100 py-10 mt-auto">
       <div className="max-w-4xl mx-auto px-4 flex flex-col items-center gap-6">
         <nav className="flex gap-8">
-          <Link to="/terms" className="text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-blue-600">Terms</Link>
-          <Link to="/privacy" className="text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-blue-600">Privacy</Link>
+          <Link to="/terms" className="text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-blue-600 transition-colors">Terms</Link>
+          <Link to="/privacy" className="text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-blue-600 transition-colors">Privacy</Link>
         </nav>
-        <p className="text-[9px] font-bold text-slate-300 uppercase tracking-[0.3em]">
+        <p className="text-[9px] font-bold text-slate-300 uppercase tracking-[0.4em]">
           © {new Date().getFullYear()} TWIBBONK STUDIO.
         </p>
       </div>
