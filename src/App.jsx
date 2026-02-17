@@ -11,12 +11,11 @@ import NotFound from './pages/NotFound';
 
 export default function App() {
   return (
-    // min-h-screen di sini sudah cukup untuk menjaga footer tetap di bawah
     <div className="min-h-screen flex flex-col bg-slate-50 font-sans antialiased text-slate-900">
       <Header />
       
-      {/* max-w-5xl agar desktop lebih luas, pb-12 untuk jarak halus ke footer */}
-      <main className="flex-grow w-full max-w-5xl mx-auto px-4 pb-12">
+      {/* flex-grow memastikan footer tetap di bawah tanpa ruang kosong berlebih */}
+      <main className="flex-grow w-full max-w-4xl mx-auto px-0 md:px-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/upload" element={<Home />} />
@@ -29,7 +28,7 @@ export default function App() {
 
       <Footer />
       
-      <Toaster position="top-right" />
+      <Toaster position="top-left" />
     </div>
   );
 }
