@@ -3,7 +3,7 @@ import { Plus, Download, Trash2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const DEFAULT_TWIBBON = '/palestina.png';
-const STORAGE_KEY = 'twibbon_storage_stable';
+const STORAGE_KEY = 'TWIBBONK_STORAGE_V1'; // NAMA TETAP / TIDAK BOLEH BERUBAH
 
 export default function Home() {
   const [gallery, setGallery] = useState(() => {
@@ -15,28 +15,28 @@ export default function Home() {
   const canvasRef = useRef(null);
   const fileInputRef = useRef(null);
 
-  // Trigger upload dari Header
+  // Trigger upload dari event global (Header)
   useEffect(() => {
     const handleTrigger = () => fileInputRef.current?.click();
     window.addEventListener('trigger-upload', handleTrigger);
     return () => window.removeEventListener('trigger-upload', handleTrigger);
   }, []);
 
-  // FIX STORAGE: Logika agar data PASTI tersimpan
+  // Simpan data dengan proteksi Quota Exceeded (Anti Zonk)
   useEffect(() => {
-    const persistData = (data) => {
+    const saveData = (data) => {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
       } catch (e) {
-        // Jika storage penuh, hapus item paling lama (FIFO) sampai bisa tersimpan
+        // Jika storage penuh, hapus item paling lama (ujung array) dan coba simpan lagi
         if (data.length > 0) {
-          const reduced = data.slice(0, -1);
-          setGallery(reduced);
-          persistData(reduced);
+          const newData = data.slice(0, -1);
+          setGallery(newData);
+          saveData(newData);
         }
       }
     };
-    persistData(gallery);
+    saveData(gallery);
   }, [gallery]);
 
   const handleProcess = (e) => {
@@ -53,7 +53,6 @@ export default function Home() {
           const ctx = canvas.getContext('2d');
           const size = 1000;
           canvas.width = size; canvas.height = size;
-
           const aspect = userImg.width / userImg.height;
           let sx, sy, sw, sh;
           if (aspect > 1) {
@@ -63,14 +62,13 @@ export default function Home() {
             sw = userImg.width; sh = userImg.width;
             sx = 0; sy = (userImg.height - userImg.width) / 2;
           }
-
           ctx.drawImage(userImg, sx, sy, sw, sh, 0, 0, size, size);
           ctx.drawImage(frameImg, 0, 0, size, size);
           
-          // Kompresi JPEG 0.6 agar muat banyak di storage
-          const result = canvas.toDataURL("image/jpeg", 0.6);
+          // Gunakan JPEG 0.7 agar kualitas bagus tapi ukuran file irit (Anti Blank)
+          const result = canvas.toDataURL("image/jpeg", 0.7);
           setGallery(prev => [result, ...prev]);
-          toast.success("BERHASIL DISIMPAN!");
+          toast.success("HASIL DISIMPAN!");
         };
         frameImg.src = DEFAULT_TWIBBON;
       };
@@ -92,9 +90,9 @@ export default function Home() {
       </section>
 
       <div className="grid grid-cols-2 gap-2 md:gap-6">
-        <label className="relative aspect-square flex flex-col items-center justify-center border-2 border-dashed border-slate-200 bg-white cursor-pointer hover:bg-slate-50 shadow-sm transition-colors group">
+        <label className="relative aspect-square flex flex-col items-center justify-center border-2 border-dashed border-slate-200 bg-white cursor-pointer hover:bg-slate-50 transition-colors shadow-sm group">
           <Plus size={32} className="text-slate-300 group-hover:text-blue-600" />
-          <span className="text-[9px] font-black mt-2 text-slate-400 uppercase tracking-widest">Tambah Foto</span>
+          <span className="text-[10px] font-black mt-2 text-slate-400 uppercase tracking-widest">Tambah Foto</span>
           <input ref={fileInputRef} type="file" className="hidden" onChange={handleProcess} accept="image/*" />
         </label>
 
