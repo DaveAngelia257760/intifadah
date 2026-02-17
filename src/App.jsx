@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Plus, Download, Trash2 } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 
-const DEFAULT_TWIBBON = '/palestine.png';
+const DEFAULT_TWIBBON = '/palestina.png';
 
 export default function App() {
   const [gallery, setGallery] = useState([]);
@@ -119,7 +119,7 @@ export default function App() {
       </div>
 
       <canvas ref={canvasRef} className="hidden"></canvas>
-      <Toaster position="bottom-center" />
+      <Toaster position="top-right" />
     </div>
   );
 }
